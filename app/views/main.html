@@ -1,0 +1,87 @@
+<style>
+  /* Put your css in here */
+
+
+  .isCorrect_true {
+    background-color: green;
+  }
+
+  .isCorrect_false {
+    background-color: red;
+  }
+  .m0{
+    margin:0;
+  }.form-control{
+    width: 25%;
+  }
+  .panel .panel-heading{
+    background-color: #545050;
+    color:#fff;
+  }
+  .panel .panel-body{
+    background-color: #f6f6f6;
+  }
+  h1.text-center{
+    margin-bottom: 1em;
+  }
+  .btn.btn-block{
+    width: 48%;
+    float: left;
+    margin: 0 7px 0 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    height: 40px;
+  }
+  .panel-body span > span{
+    display: inline-block;
+    padding:0 8px;
+  }
+  .panel-body input[type="radio"]{
+    margin: 0 4px 0 0;
+    top: 2px;
+    position: relative;
+  }
+</style>
+<div class="container-fluid">
+  <h1 class="text-center">Cricket Trivia</h1>
+  <div class="row">
+    <!--form-->
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-default" ng-repeat="question in questions">
+        <div class="panel-heading" id="quest_{{$parent.$index}}">
+          <p class="m0">{{ question.questionText }}</p>
+        </div>
+        <div class="panel-body">
+          <!-- <div class="form-group m0">
+          <select class="form-control" >
+            <option value="0">Please Select</option>
+            <option  ng-model="answers[$parent.$index]"  id="quest_{{$parent.$index}}_answer_{{$index}}" ng-repeat="answer in question.answers"
+            value="{{ answer.answerText }}" name="quest_{{$parent.$index}}_answers">{{answer.answerText}}</option>
+          </select>
+          </div> -->
+          <span id="quest_{{$parent.$index}}">
+            <span class="form-group m0" ng-repeat="answer in question.answers">
+              <label class="isCorrect_{{answer.selected}}" for="quest_{{$parent.$index}}_answer_{{$index}}">
+                <input type="radio" id="quest_{{$parent.$index}}_answer_{{$index}}" ng-model="answers[$parent.$index]"
+                  value="{{ answer.answerText }}" name="quest_{{$parent.$index}}_answers" />{{ answer.answerText }}</label>
+            </span>
+          </span>
+        </div>
+      </div>
+
+
+      <button class="btn btn-block" type="submit" ng:click="showResult()">Submit</button>
+
+      <button class="btn btn-block" type="reset" ng:click="reset()">Reset</button>
+<span ng-show="look" style="color:Red">{{msg}}</span>
+<span ng-show="look" style="color:rgb(48, 161, 54)">{{success}}</span>
+
+
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    </div>
+  </div>
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
